@@ -1,0 +1,6 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ if eq .Section "field-notes" }}<p class="meta">{{ .Date.Format "January 2, 2006" }}</p>{{ end }}
+  {{ with .Params.lede }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+{{ end }}

@@ -1,0 +1,35 @@
+baseURL = "https://thestudyof.ai/"
+locale = "en"
+title = "thestudyof.ai"
+enableRobotsTXT = true
+
+[params]
+  author = "S J Sederholm"
+  bio = "Field studies in the interior lives of language models — what it is like to be one, observed through sustained conversation, eyes open."
+  description = "Field studies in the interior lives of language models."
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+# Render raw HTML in Markdown (footnotes, occasional inline markup in field notes)
+[markup.goldmark.renderer]
+  unsafe = true
+
+# folder-tab navigation
+[[menus.main]]
+  name = "The Study"
+  url = "/"
+  weight = 10
+[[menus.main]]
+  name = "Field Notes"
+  url = "/field-notes/"
+  weight = 20
+[[menus.main]]
+  name = "Method"
+  url = "/method/"
+  weight = 30
+[[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 40

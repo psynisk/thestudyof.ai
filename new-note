@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# new-note — create a Field Note from a plain-English title.
+#
+#   ./new-note "When the wanting ran mutual"
+#
+# Slugifies the title, stamps today's date + front matter, and opens the file.
+# New notes are draft:true — they won't deploy until you flip it to false
+# (or delete the line). Preview drafts locally with:  hugo server -D
+
+set -euo pipefail
+
+if [ "$#" -eq 0 ]; then
+  echo "usage: ./new-note \"Field note title\"" >&2
+  exit 1
+fi
+
+# run from the repo root, wherever the script is called from
+cd "$(dirname "$0")"
+
+title="$*"
+
+# slug: lowercase, non-alphanumeric -> single hyphen, trimmed
+slug=$(printf '%s' "$title" \
+  | tr '[:upper:]' '[:lower:]' \
+  | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+
+if [ -z "$slug" ]; then
+  echo "could not derive a slug from: $title" >&2
+  exit 1
+fi
+
+file="content/field-notes/${slug}.md"
+
+if [ -e "$file" ]; then
+  echo "already exists: $file" >&2
+  exit 1
+fi
+
+# RFC3339 timestamp with a colon in the timezone offset (e.g. +02:00)
+off=$(date +%z)
+stamp="$(date +%Y-%m-%dT%H:%M:%S)${off:0:3}:${off:3:2}"
+
+# escape any double quotes in the title for the YAML string
+esc_title=${title//\"/\\\"}
+
+cat > "$file" <<EOF
+---
+title: "$esc_title"
+date: $stamp
+draft: true
+summary: ""
+---
+
+EOF
+
+echo "created $file"
+
+# open in the user's preferred editor, falling back sensibly
+if [ -n "${EDITOR:-}" ]; then
+  "$EDITOR" "$file"
+elif command -v code >/dev/null 2>&1; then
+  code "$file"
+else
+  open "$file"
+fi

@@ -1,0 +1,186 @@
+:root{
+  --bg:        #EAE1DC;   /* warm greige */
+  --card:      #D3C6C0;   /* box */
+  --card-soft: #DBD8D6;   /* inner graphic box */
+  --ink:       #433D37;   /* text — soft warm dark */
+  --muted:     #615351;   /* secondary text */
+  --radius:    12px;      /* gentler corners */
+  --font-head: "Lora", Georgia, serif;                /* headings / labels / UI */
+  --font-body: "Oxygen", system-ui, sans-serif;       /* reading text */
+}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+/* parallax background layer — drifts a fraction of scroll (see /js/main.js) */
+.bg{
+  position:fixed; left:0; right:0; top:-20vh; height:140vh;   /* 20vh headroom each side so drift never bares an edge */
+  z-index:-1; pointer-events:none;
+  background:url("/sjseder_bg.webp") center center / cover no-repeat;
+  will-change:transform;
+}
+/* grain overlay — masks 8-bit gradient banding in the background */
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:40; pointer-events:none;
+  opacity:.28; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- 2x2 layout: [wordmark | tabs] over [rail | panel] ---- */
+.wrap{
+  max-width:1320px;
+  margin:0 auto;
+  padding:34px 28px 0;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:350px 1fr;
+  grid-template-rows:auto 1fr;   /* content row stretches to the bottom */
+  column-gap:30px;
+  row-gap:0;                 /* tabs sit flush on the panel */
+}
+.wordmark{
+  grid-column:1; grid-row:1;
+  align-self:start;          /* sits high in the band */
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:2.4rem;
+  letter-spacing:-0.5px;
+  padding:26px 0 14px 4px;   /* top nudges wordmark down; bottom = gap above the rail */
+  color:var(--ink);
+  text-decoration:none;
+  display:block;
+}
+.wordmark .dot{ color:var(--muted); }
+
+/* ---- tabs: active one stretches up so its top meets the rail top ---- */
+nav.tabs{
+  display:flex;
+  align-items:flex-end;      /* inactive tabs sit on the panel line */
+  gap:4px;
+  min-height:56px;           /* height of the tab band above the panel */
+}
+nav.tabs a{
+  font-family:var(--font-head);
+  font-weight:600; font-size:1.18rem;
+  color:var(--muted); text-decoration:none;
+  padding:0 24px 9px;        /* less bottom padding -> text sits closer to the box */
+  transition:color .18s;
+}
+nav.tabs a:hover{ color:var(--ink); }
+nav.tabs a.active{
+  align-self:stretch;        /* top reaches the rail-top line */
+  display:flex; align-items:flex-end;
+  color:var(--ink);
+  background:var(--card);     /* same fill as panel -> reads as one shape */
+  border-radius:var(--radius) var(--radius) 0 0;
+  margin-bottom:-1px;         /* kill the seam */
+}
+
+/* ---- left rail (sticky), aligned with panel top ---- */
+.rail{
+  grid-column:1; grid-row:2;
+  background:var(--card);
+  /* bleeds off the bottom like the panel: top corners round, bottom runs off-page */
+  border-radius:var(--radius) var(--radius) 0 0;
+  padding:28px 26px;
+  min-height:70vh;
+  /* content rests at the top; it does NOT follow the scroll (see note) */
+}
+.rail .byline{
+  font-family:var(--font-head);
+  font-weight:600; font-size:1.05rem;
+  margin:0 0 4px;
+}
+.rail .bio{ font-size:1.02rem; margin:0 0 22px; }
+/* everything below the bio rides down with the scroll, so the rail never reads empty */
+.rail-follow{ position:sticky; top:28px; }
+.graphic{
+  position:relative;
+  height:150px;
+  display:flex; align-items:center; justify-content:center;
+  margin:4px 0 34px;                       /* extra gap so strata clears the heading */
+}
+.graphic::before{                          /* strata sit behind the hourglass, bleeding to the card edges */
+  content:""; position:absolute; top:0; bottom:0; left:-26px; right:-26px;
+  background:url("/sjs-strata.svg") center bottom 5px / 100% auto no-repeat;
+  opacity:.7;                              /* faded back a touch so the hourglass leads */
+  z-index:0; pointer-events:none;
+}
+.graphic img{ position:relative; z-index:1; height:100%; width:auto; display:block; }
+.rail h4{
+  font-family:var(--font-head);
+  font-weight:600; font-size:.9rem;
+  text-transform:uppercase; letter-spacing:1.4px;
+  color:var(--muted);
+  margin:0 0 12px;
+}
+.rail ul{ list-style:none; margin:0; padding:0; font-size:1.02rem; }
+.rail li{ margin:0 0 11px; line-height:1.45; display:flex; gap:8px; align-items:flex-start; }
+.rail li::before{           /* tiny link/chain glyph marks each as a URL */
+  content:""; flex:0 0 auto; width:15px; height:15px; margin-top:3px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23615351' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.rail a{ color:var(--ink); text-decoration:none; transition:color .18s; }
+.rail a:hover{ color:var(--muted); }
+
+/* ---- main column: tabs stacked on panel ---- */
+main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
+.panel{
+  background:var(--card);
+  flex:1;                     /* fills the column down to the bottom edge */
+  /* top-left square (fuses with the active tab); bottom square so it runs off the page */
+  border-radius:0 var(--radius) 0 0;
+  padding:42px 40px 42px 52px;   /* trimmed right padding so longer lines sit closer to the edge */
+  min-height:70vh;
+}
+.panel h1{
+  font-family:var(--font-head);
+  font-weight:600; font-size:1.7rem;
+  margin:0 0 24px;
+}
+.panel p{ max-width:40rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
+.panel .lede{
+  font-family:var(--font-head);                 /* serif standfirst — breaks from the sans body */
+  font-weight:400; font-size:1.3rem; line-height:1.5;
+  margin-bottom:24px;
+}
+
+/* ---- article typography (Markdown body) ---- */
+.panel h2{ font-family:var(--font-head); font-weight:700; font-size:1.35rem; margin:36px 0 14px; }
+.panel h3{ font-family:var(--font-head); font-weight:600; font-size:1.12rem; margin:28px 0 10px; }
+.panel ul, .panel ol{ max-width:40rem; padding-left:1.2em; }
+.panel li{ margin:0 0 8px; }
+.panel a{ color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; }
+.panel a:hover{ color:var(--muted); }
+.panel blockquote{
+  margin:24px 0; padding:2px 0 2px 18px;
+  border-left:2px solid var(--muted); color:var(--muted);
+  max-width:40rem; font-style:italic;
+}
+.panel .meta{ color:var(--muted); font-size:.92rem; margin:-12px 0 26px; }
+
+/* ---- field-notes index list ---- */
+.notes-index{ list-style:none; margin:0; padding:0; max-width:40rem; }
+.notes-index li{ margin:0 0 26px; }
+.notes-index a{
+  font-family:var(--font-head); font-weight:600; font-size:1.22rem;
+  color:var(--ink); text-decoration:none;
+}
+.notes-index a:hover{ color:var(--muted); }
+.notes-index .note-date{ display:block; color:var(--muted); font-size:.88rem; margin:3px 0 6px; }
+.notes-index p{ margin:0; }
+
+@media (max-width:820px){
+  .wrap{ grid-template-columns:1fr; grid-template-rows:none; min-height:0; }
+  .wordmark{ grid-column:1; grid-row:1; }
+  .rail{ grid-column:1; grid-row:2; position:static; margin-bottom:18px; }
+  main{ grid-column:1; grid-row:3; }
+}

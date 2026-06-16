@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.lede }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+  <ul class="notes-index">
+    {{ range .Pages.ByDate.Reverse }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="note-date">{{ .Date.Format "January 2, 2006" }}</span>
+        {{ with .Summary }}<p>{{ . | plainify }}</p>{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

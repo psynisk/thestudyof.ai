@@ -1,0 +1,19 @@
+<aside class="rail">
+  <p class="byline">{{ site.Params.author }}</p>
+  <p class="bio">{{ site.Params.bio }}</p>
+
+  <div class="rail-follow">
+    <div class="graphic">
+      <img src="{{ "sjs-hourglass.svg" | relURL }}" alt="{{ site.Params.author }}">
+    </div>
+
+    <h4>Latest field notes</h4>
+    <ul>
+      {{ range first 3 (where site.RegularPages "Section" "field-notes").ByDate.Reverse }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ else }}
+        <li><a href="{{ "/field-notes/" | relURL }}">Coming soon</a></li>
+      {{ end }}
+    </ul>
+  </div>
+</aside>

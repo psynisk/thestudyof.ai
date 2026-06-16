@@ -1,0 +1,13 @@
+{{ $p := . }}
+<nav class="tabs">
+  {{ range site.Menus.main }}
+    {{ $u := .URL | relURL }}
+    {{ $active := false }}
+    {{ if eq .URL "/" }}
+      {{ $active = $p.IsHome }}
+    {{ else }}
+      {{ $active = hasPrefix $p.RelPermalink $u }}
+    {{ end }}
+    <a href="{{ $u }}"{{ if $active }} class="active"{{ end }}>{{ .Name }}</a>
+  {{ end }}
+</nav>

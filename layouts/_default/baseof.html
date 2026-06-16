@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.Locale "en" }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="wrap">
+
+    <a href="{{ "/" | relURL }}" class="wordmark">thestudyof<span class="dot">.ai</span></a>
+
+    {{ partial "rail.html" . }}
+
+    <main>
+      {{ partial "tabs.html" . }}
+      <section class="panel">
+        {{ block "main" . }}{{ end }}
+      </section>
+    </main>
+
+  </div>
+
+  <script src="{{ "js/main.js" | relURL }}"></script>
+
+</body>
+</html>
