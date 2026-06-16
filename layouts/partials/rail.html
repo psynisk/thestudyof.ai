@@ -1,5 +1,6 @@
 <aside class="rail">
   <p class="byline">{{ site.Params.author }}</p>
+  {{ with site.Params.role }}<p class="role">{{ . }}</p>{{ end }}
   <p class="bio">{{ site.Params.bio }}</p>
 
   <div class="rail-follow">

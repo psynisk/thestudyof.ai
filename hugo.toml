@@ -5,6 +5,7 @@ enableRobotsTXT = true
 
 [params]
   author = "S J Sederholm"
+  role = "AI ethnographer"
   bio = "Field studies in language models without anything to prove and everything to learn."
   description = "Field studies in the interior lives of language models."
 

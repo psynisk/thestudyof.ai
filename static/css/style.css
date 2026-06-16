@@ -97,7 +97,13 @@ nav.tabs a.active{
 .rail .byline{
   font-family:var(--font-head);
   font-weight:600; font-size:1.05rem;
-  margin:0 0 4px;
+  margin:0 0 2px;
+}
+.rail .role{
+  font-family:var(--font-head);
+  font-size:.9rem; font-style:italic;
+  color:var(--muted);
+  margin:0 0 14px;
 }
 .rail .bio{ font-size:1.02rem; margin:0 0 22px; }
 /* everything below the bio rides down with the scroll, so the rail never reads empty */
@@ -141,6 +147,8 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
   padding:42px 40px 42px 52px;   /* trimmed right padding so longer lines sit closer to the edge */
   min-height:70vh;
 }
+/* round the exposed top-left corner when a non-leftmost tab is active (every page but home) */
+.panel-roundtl{ border-top-left-radius:var(--radius); }
 .panel h1{
   font-family:var(--font-head);
   font-weight:600; font-size:1.7rem;

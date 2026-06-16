@@ -15,7 +15,7 @@
 
     <main>
       {{ partial "tabs.html" . }}
-      <section class="panel">
+      <section class="panel{{ if not .IsHome }} panel-roundtl{{ end }}">
         {{ block "main" . }}{{ end }}
       </section>
     </main>
