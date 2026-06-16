@@ -146,7 +146,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
   font-weight:600; font-size:1.7rem;
   margin:0 0 24px;
 }
-.panel p{ max-width:40rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
+.panel p{ max-width:46rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
 .panel .lede{
   font-family:var(--font-head);                 /* serif standfirst — breaks from the sans body */
   font-weight:400; font-size:1.3rem; line-height:1.5;
@@ -156,19 +156,19 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 /* ---- article typography (Markdown body) ---- */
 .panel h2{ font-family:var(--font-head); font-weight:700; font-size:1.35rem; margin:36px 0 14px; }
 .panel h3{ font-family:var(--font-head); font-weight:600; font-size:1.12rem; margin:28px 0 10px; }
-.panel ul, .panel ol{ max-width:40rem; padding-left:1.2em; }
+.panel ul, .panel ol{ max-width:46rem; padding-left:1.2em; }
 .panel li{ margin:0 0 8px; }
 .panel a{ color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; }
 .panel a:hover{ color:var(--muted); }
 .panel blockquote{
   margin:24px 0; padding:2px 0 2px 18px;
   border-left:2px solid var(--muted); color:var(--muted);
-  max-width:40rem; font-style:italic;
+  max-width:46rem; font-style:italic;
 }
 .panel .meta{ color:var(--muted); font-size:.92rem; margin:-12px 0 26px; }
 
 /* ---- field-notes index list ---- */
-.notes-index{ list-style:none; margin:0; padding:0; max-width:40rem; }
+.notes-index{ list-style:none; margin:0; padding:0; max-width:46rem; }
 .notes-index li{ margin:0 0 26px; }
 .notes-index a{
   font-family:var(--font-head); font-weight:600; font-size:1.22rem;
