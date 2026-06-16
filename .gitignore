@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Hugo (when we port to it) — generated output isn't committed
+public/
+.hugo_build.lock
+
+# local scratch / exploration — not part of the published site
+hourglass2.html
+hourglass3.html
+hourglass4.html
+hourglass5.html
+hourglass-shape.html
+hourglass-vector.html
+logo-options.html
+logo-options2.html
+logo-options3.html
+butterfly.html
+creatures.html
+studyof.html
+logo.svg
+sjs-hourglass-uniform.bak.svg
