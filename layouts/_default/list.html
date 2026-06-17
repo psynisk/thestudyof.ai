@@ -1,13 +1,16 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
   {{ with .Params.lede }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
   {{ .Content }}
   <ul class="notes-index">
     {{ range .Pages.ByDate.Reverse }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ $url := .RelPermalink }}
+        <a href="{{ $url }}">{{ .Title }}</a>
         <span class="note-date">{{ .Date.Format "January 2, 2006" }}</span>
-        {{ with .Summary }}<p>{{ . | plainify }}</p>{{ end }}
+        {{ with .Plain | plainify | strings.TrimSpace }}
+          {{ $short := truncate 175 "" . }}
+          <p>{{ $short }}{{ if ne (printf "%v" $short) . }} <a class="more" href="{{ $url }}">[…]</a>{{ end }}</p>
+        {{ end }}
       </li>
     {{ end }}
   </ul>

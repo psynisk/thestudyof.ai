@@ -1,6 +1,21 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ if eq .Section "field-notes" }}<p class="meta">{{ .Date.Format "January 2, 2006" }}</p>{{ end }}
+  {{ if eq .Section "field-notes" }}
+    <a class="back-link" href="{{ "/field-notes/" | relURL }}">‹ Back</a>
+    <h1>{{ .Title }}</h1>
+    <p class="meta">{{ .Date.Format "January 2, 2006" }}</p>
+  {{ end }}
   {{ with .Params.lede }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
   {{ .Content }}
+  {{ with .Params.art }}<img class="page-art" src="{{ . | relURL }}" alt="" aria-hidden="true">{{ end }}
+  {{ if eq .Section "field-notes" }}
+    {{ $notes := where site.RegularPages "Section" "field-notes" }}
+    {{ $older := where $notes "Date" "lt" .Date }}
+    {{ $newer := where $notes "Date" "gt" .Date }}
+    {{ if or $older $newer }}
+      <nav class="entry-nav">
+        <span>{{ with first 1 $older }}{{ with index . 0 }}<a href="{{ .RelPermalink }}">‹ Previous</a>{{ end }}{{ end }}</span>
+        <span>{{ with last 1 $newer }}{{ with index . 0 }}<a href="{{ .RelPermalink }}">Next ›</a>{{ end }}{{ end }}</span>
+      </nav>
+    {{ end }}
+  {{ end }}
 {{ end }}

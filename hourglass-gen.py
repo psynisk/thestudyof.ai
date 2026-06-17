@@ -61,9 +61,9 @@ def stroke(segs,n,wfn,M=10):
 # width: thin at center crossing, gentle fullness through the bellies
 def loopw(gt):
     d=min(gt,1-gt); r=min(d/0.13,1.0); s=r*r*(3-2*r)
-    belly=0.8*(math.exp(-((gt-0.2)/0.09)**2)+math.exp(-((gt-0.8)/0.09)**2))
-    return 1.35+2.05*s+belly
-def sand(gt):  return 1.3+1.2*math.cos(math.pi*gt/2)
+    belly=0.6*(math.exp(-((gt-0.2)/0.09)**2)+math.exp(-((gt-0.8)/0.09)**2))
+    return 1.05+1.6*s+belly
+def sand(gt):  return 1.0+0.95*math.cos(math.pi*gt/2)
 
 C=(48,70)   # crossing at canvas middle so the two bulbs balance
 # TOP bulb: the rounded bulb, with a slightly flatter & wider crown
@@ -118,8 +118,8 @@ def write_svg(path, color, bands, fills=(), keylines=()):
     s+='</svg>\n'
     open(path,'w').write(s)
 
-write_svg('/Users/sarah/thestudyof.ai/sjs-hourglass.svg', '#433D37', [topband,botband,jstroke])
-write_svg('/Users/sarah/thestudyof.ai/sjs-hourglass-favicon.svg', '#2A2521',
+write_svg('/Users/sarah/thestudyof.ai/static/sjs-hourglass.svg', '#433D37', [topband,botband,jstroke])
+write_svg('/Users/sarah/thestudyof.ai/static/sjs-hourglass-favicon.svg', '#2A2521',
           [topband_f,botband_f,jstroke_f], fills=[(topfill,SAND),(botfill,SAND)],
           keylines=[outer_loop(topbulb,240,fw), outer_loop(botbulb,240,fw), jstroke_f])
 print("written both")

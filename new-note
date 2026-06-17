@@ -49,7 +49,6 @@ cat > "$file" <<EOF
 title: "$esc_title"
 date: $stamp
 draft: true
-summary: ""
 ---
 
 EOF
