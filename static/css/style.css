@@ -38,7 +38,7 @@ body::after{
 .wrap{
   max-width:1320px;
   margin:0 auto;
-  padding:34px 28px 0;
+  padding:4px 28px 0;
   min-height:100vh;
   display:grid;
   grid-template-columns:350px 1fr;
@@ -127,7 +127,7 @@ nav.tabs a.active{
 }
 .graphic::before{                          /* strata sit behind the hourglass, bleeding to the card edges */
   content:""; position:absolute; top:0; bottom:0; left:-26px; right:-26px;
-  background:url("/sjs-strata.svg") center bottom 7px / 100% auto no-repeat;
+  background:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
   opacity:.7;                              /* faded back a touch so the hourglass leads */
   z-index:0; pointer-events:none;
 }
