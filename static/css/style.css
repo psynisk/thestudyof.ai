@@ -113,11 +113,8 @@ nav.tabs a.active{
 .rail-credit{
   font-family:var(--font-head); font-size:.9rem; line-height:1.5;
   color:var(--muted);
-  margin:36px 0 0;
-  margin-top:auto;                 /* sit at the bottom of the rail */
-  position:sticky; bottom:28px;    /* and stay pinned to the bottom while scrolling */
+  margin-top:auto;                 /* just sit at the bottom of the rail */
   padding-top:24px;
-  background:var(--card);          /* matches the rail; cleanly overlays the last note on very short screens */
 }
 .graphic{
   position:relative;
