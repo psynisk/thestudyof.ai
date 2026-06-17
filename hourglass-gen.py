@@ -75,7 +75,7 @@ topbulb=[('c',C,(38,60),(12,53),(9,37)),
 # BOTTOM bulb = exact mirror of the top about y=70
 botbulb=[(s[0],)+tuple((x,140-y) for (x,y) in s[1:]) for s in topbulb]
 # J sand: both ends buried in the walls, tail curls down inside the right wall
-sandj=[('l',(11,102),(80,92)),('c',(80,92),(85,98),(87,106),(84,114))]
+sandj=[('l',(9,103),(80,92)),('c',(80,92),(85,100),(87,110),(85,120))]
 
 # main logo weight
 topband=band(topbulb,240,loopw); botband=band(botbulb,240,loopw); jstroke=stroke(sandj,90,sand)
