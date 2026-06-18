@@ -203,6 +203,10 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 .notes-index a:hover{ color:var(--muted); }                       /* title link hover */
 .notes-index .note-date{ display:block; color:var(--muted); font-size:.88rem; margin:3px 0 6px; }
 .notes-index p{ margin:0; }
+.notes-index .fade-tail{   /* the last few words dissolve left→right into the cutoff */
+  -webkit-mask-image:linear-gradient(to right, #000 15%, rgba(0,0,0,0) 95%);
+          mask-image:linear-gradient(to right, #000 15%, rgba(0,0,0,0) 95%);
+}
 .notes-index .more{   /* the […] cutoff mark, also a link to the entry */
   font-family:var(--font-body); font-weight:400; font-size:.85em;
   color:var(--muted); text-decoration:none;

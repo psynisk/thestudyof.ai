@@ -9,7 +9,15 @@
         <span class="note-date">{{ .Date.Format "January 2, 2006" }}</span>
         {{ with .Plain | htmlUnescape | plainify | strings.TrimSpace }}
           {{ $short := truncate 175 "" . }}
-          <p>{{ $short }}{{ if ne (printf "%v" $short) . }} <a class="more" href="{{ $url }}">[…]</a>{{ end }}</p>
+          {{ $cut := ne (printf "%v" $short) . }}
+          {{ $words := split $short " " }}
+          {{ if and $cut (gt (len $words) 5) }}
+            {{ $head := delimit (first (sub (len $words) 3) $words) " " }}
+            {{ $tail := delimit (after (sub (len $words) 3) $words) " " }}
+            <p>{{ $head }} <span class="fade-tail">{{ $tail }}</span> <a class="more" href="{{ $url }}">[…]</a></p>
+          {{ else }}
+            <p>{{ $short }}{{ if $cut }} <a class="more" href="{{ $url }}">[…]</a>{{ end }}</p>
+          {{ end }}
         {{ end }}
       </li>
     {{ end }}
