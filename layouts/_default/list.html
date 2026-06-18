@@ -7,7 +7,7 @@
         {{ $url := .RelPermalink }}
         <a href="{{ $url }}">{{ .Title }}</a>
         <span class="note-date">{{ .Date.Format "January 2, 2006" }}</span>
-        {{ with .Plain | plainify | strings.TrimSpace }}
+        {{ with .Plain | htmlUnescape | plainify | strings.TrimSpace }}
           {{ $short := truncate 175 "" . }}
           <p>{{ $short }}{{ if ne (printf "%v" $short) . }} <a class="more" href="{{ $url }}">[…]</a>{{ end }}</p>
         {{ end }}
