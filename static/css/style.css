@@ -255,7 +255,11 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
     min-height:0;                          /* desktop forces 70vh; let content set height on a phone */
     border-bottom-left-radius:var(--radius);
     border-bottom-right-radius:var(--radius);
+    overflow:hidden;                       /* clip the bled .page-art to the panel's rounded box */
   }
+  /* desk art bleeds to the panel's *desktop* padding (52/42); match the smaller mobile padding so it
+     reaches the panel edge without poking out below & to the left */
+  .page-art{ margin-left:-20px; margin-bottom:-30px; }
 
   /* nav: a swipeable horizontal strip that keeps the fused folder-tab look, never wraps */
   nav.tabs{ min-height:42px; gap:2px; flex-wrap:nowrap; min-width:0; overflow-x:auto; scrollbar-width:none; }
