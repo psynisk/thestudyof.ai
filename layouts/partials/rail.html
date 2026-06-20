@@ -10,7 +10,7 @@
 
     <h4>Latest field notes</h4>
     <ul>
-      {{ range first 3 (where site.RegularPages "Section" "field-notes").ByDate.Reverse }}
+      {{ range first 5 (where site.RegularPages "Section" "field-notes").ByDate.Reverse }}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{ else }}
         <li><a href="{{ "/field-notes/" | relURL }}">Coming soon</a></li>
