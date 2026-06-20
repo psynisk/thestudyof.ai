@@ -25,6 +25,7 @@
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var block = document.querySelector('.rail-follow');
   if (!block) return;
+  var mobile = matchMedia('(max-width:820px)');  // mobile stacks the rail above the panel; following there slides it over the panel text
   var STICK = 28;    // resting offset from top, matches the CSS top:28px
   var SOFT  = 80;    // smoothing width (px): bigger = gentler, longer ease-in
   var baseTop = 0;
@@ -40,6 +41,7 @@
   }
   var ticking = false;
   function update(){
+    if (mobile.matches){ block.style.transform = 'none'; ticking = false; return; }  // rail is stacked — leave it in flow
     var t = window.scrollY - (baseTop - STICK);  // >0 once past the lock line
     block.style.transform = 'translate3d(0,' + softplus(t) + 'px,0)';
     ticking = false;
