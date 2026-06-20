@@ -1,13 +1,14 @@
 :root{
   color-scheme: light;   /* light-only site — stop browsers auto-darkening it (Brave/Chrome force-dark) */
-  --bg:        #EAE1DC;   /* warm greige */
-  --card:      #D3C6C0;   /* box */
-  --card-soft: #DBD8D6;   /* inner graphic box */
-  --ink:       #433D37;   /* text — soft warm dark */
-  --muted:     #615351;   /* secondary text */
+  --bg:        #DDE0D6;   /* cool sage-stone ground (Cool Herbarium) */
+  --card:      #F6F5EF;   /* warm-white card — crisp on the cool ground */
+  --card-soft: #ECEDE4;   /* inner graphic box */
+  --ink:       #24262A;   /* deep neutral-cool charcoal — green cast removed (was #232A20, G-dominant) */
+  --muted:     #5B5F64;   /* secondary text — cool grey, no green cast */
+  --accent:    #1C8C84;   /* verdigris turquoise — harmonizes with the cool ground. Oxblood alt: #9A3324 */
   --radius:    12px;      /* gentler corners */
   --font-head: "Lora", Georgia, serif;                /* headings / labels / UI */
-  --font-body: "Oxygen", system-ui, sans-serif;       /* reading text */
+  --font-body: "Karla", system-ui, sans-serif;        /* reading text */
 }
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
@@ -24,7 +25,7 @@ body{
 .bg{
   position:fixed; left:0; right:0; top:-20vh; height:140vh;   /* 20vh headroom each side so drift never bares an edge */
   z-index:-1; pointer-events:none;
-  background:url("/sjseder_bg.webp") center center / cover no-repeat;
+  background:url("/sjseder_bg_v2.webp") center center / cover no-repeat;   /* sage-dune ground (Herbarium) */
   will-change:transform;
 }
 /* grain overlay — masks 8-bit gradient banding in the background */
@@ -125,7 +126,9 @@ nav.tabs a.active{
 }
 .graphic::before{                          /* strata sit behind the hourglass, bleeding to the card edges */
   content:""; position:absolute; top:0; bottom:0; left:-26px; right:-26px;
-  background:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
+  background:var(--muted);                 /* strata tint follows the scheme's muted category */
+  -webkit-mask:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
+          mask:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
   opacity:.7;                              /* faded back a touch so the hourglass leads */
   z-index:0; pointer-events:none;
 }
@@ -236,6 +239,23 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
   display:block; width:min(640px, 78%); height:auto;
   margin-top:auto; margin-right:auto;       /* anchor bottom-left */
   margin-left:-52px; margin-bottom:-42px;   /* bleed off the panel's left & bottom edges */
+}
+
+/* ===== "confident classic" pass: definition + one accent (oxblood) ===== */
+.rail, .panel{ box-shadow:0 1px 4px rgba(40,28,18,.07); }   /* whisper of lift so cards read as cards */
+.wordmark .dot{ color:var(--accent); }                 /* turquoise dot — ~2:1 on the lighter updated ground; small decorative mark */
+nav.tabs a.active{ box-shadow: inset 0 3px 0 0 var(--accent); }   /* accent cap on the active tab */
+.panel a{ color:var(--accent); text-decoration-color:var(--accent); }
+.panel a:hover{ color:var(--ink); }
+.notes-index a{ color:var(--ink); }   /* keep entry titles dark — accent stays sparing (hover still goes oxblood) */
+.panel a.contact{ color:var(--accent); -webkit-text-stroke-color:var(--accent); text-stroke-color:var(--accent); }
+.panel a.contact:hover{ color:var(--ink); -webkit-text-stroke-color:var(--ink); }
+.panel blockquote{ border-left-color:var(--accent); }
+.rail a:hover, .notes-index a:hover{ color:var(--accent); }
+.rail li::before{   /* link-glyph follows --accent via a mask, so it never drifts from the accent color */
+  background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 
 /* ===== mobile: re-choreograph the desk into a single content-first column =====
