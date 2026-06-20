@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 {{ $pagetitle := cond .IsHome site.Title (printf "%s — %s" .Title site.Title) }}
 {{ $desc := (or .Description .Params.lede site.Params.description) | plainify }}
 {{ $ogimg := "og-image.png" | absURL }}

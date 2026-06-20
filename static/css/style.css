@@ -1,4 +1,5 @@
 :root{
+  color-scheme: light;   /* light-only site — stop browsers auto-darkening it (Brave/Chrome force-dark) */
   --bg:        #EAE1DC;   /* warm greige */
   --card:      #D3C6C0;   /* box */
   --card-soft: #DBD8D6;   /* inner graphic box */
@@ -240,6 +241,12 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 @media (max-width:820px){
   .wrap{ grid-template-columns:1fr; grid-template-rows:none; min-height:0; }
   .wordmark{ grid-column:1; grid-row:1; }
-  .rail{ grid-column:1; grid-row:2; position:static; margin-bottom:18px; }
+  .rail{
+    grid-column:1; grid-row:2; position:static; margin-bottom:18px;
+    min-height:0;                      /* desktop forces 70vh; on a phone shrink to content, no dead space */
+    border-radius:var(--radius);       /* freestanding card here, so round all four corners */
+  }
+  .rail-follow{ position:static; }     /* kill the desktop sticky — on a phone it floats down over the panel */
+  .rail-credit{ margin-top:18px; }     /* was margin-top:auto (pushed to bottom of the tall rail) — sit under the links */
   main{ grid-column:1; grid-row:3; }
 }
