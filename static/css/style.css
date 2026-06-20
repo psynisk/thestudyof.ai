@@ -4,6 +4,7 @@
   --card:      #F6F5EF;   /* warm-white card — crisp on the cool ground */
   --card-soft: #ECEDE4;   /* inner graphic box */
   --ink:       #24262A;   /* deep neutral-cool charcoal — green cast removed (was #232A20, G-dominant) */
+  --ink-logo:  #103A45;   /* deep cyan-turquoise — wordmark + graphics only; body text stays --ink */
   --muted:     #5B5F64;   /* secondary text — cool grey, no green cast */
   --accent:    #1C8C84;   /* verdigris turquoise — harmonizes with the cool ground. Oxblood alt: #9A3324 */
   --radius:    12px;      /* gentler corners */
@@ -56,7 +57,7 @@ body::after{
   font-size:2.4rem;
   letter-spacing:-0.5px;
   padding:26px 0 14px 4px;   /* top nudges wordmark down; bottom = gap above the rail */
-  color:var(--ink);
+  color:var(--ink-logo);
   text-decoration:none;
   display:block;
 }
