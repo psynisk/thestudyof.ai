@@ -126,9 +126,7 @@ nav.tabs a.active{
 }
 .graphic::before{                          /* strata sit behind the hourglass, bleeding to the card edges */
   content:""; position:absolute; top:0; bottom:0; left:-26px; right:-26px;
-  background:var(--muted);                 /* strata tint follows the scheme's muted category */
-  -webkit-mask:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
-          mask:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;
+  background:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;  /* color baked into the SVG strokes; CSS mask dropped — Firefox wouldn't apply it */
   opacity:.7;                              /* faded back a touch so the hourglass leads */
   z-index:0; pointer-events:none;
 }
