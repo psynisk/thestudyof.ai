@@ -26,7 +26,7 @@ body{
 .bg{
   position:fixed; left:0; right:0; top:-20vh; height:140vh;   /* 20vh headroom each side so drift never bares an edge */
   z-index:-1; pointer-events:none;
-  background:url("/sjseder_bg_v2.webp") center center / cover no-repeat;   /* sage-dune ground (Herbarium) */
+  background:url("/sjseder_bg_v2.webp") center top / cover no-repeat;   /* sage-dune ground (Herbarium) — anchored top: calm light band leads, busy waves drift down behind the panel */
   will-change:transform;
 }
 /* grain overlay — masks 8-bit gradient banding in the background */
@@ -165,7 +165,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
   font-weight:600; font-size:1.7rem;
   margin:0 0 24px;
 }
-.panel p{ max-width:46rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
+.panel p{ max-width:37rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
 .panel .lede{
   font-family:var(--font-head);                 /* serif standfirst — breaks from the sans body */
   font-weight:400; font-size:1.3rem; line-height:1.5;
@@ -175,14 +175,14 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 /* ---- article typography (Markdown body) ---- */
 .panel h2{ font-family:var(--font-head); font-weight:700; font-size:1.35rem; margin:36px 0 14px; }
 .panel h3{ font-family:var(--font-head); font-weight:600; font-size:1.12rem; margin:28px 0 10px; }
-.panel ul, .panel ol{ max-width:46rem; padding-left:1.2em; }
+.panel ul, .panel ol{ max-width:37rem; padding-left:1.2em; }
 .panel li{ margin:0 0 8px; }
 .panel a{ color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; }
 .panel a:hover{ color:var(--muted); }
 .panel blockquote{
   margin:24px 0; padding:2px 0 2px 18px;
   border-left:2px solid var(--muted); color:var(--muted);
-  max-width:46rem; font-style:italic;
+  max-width:37rem; font-style:italic;
 }
 .panel .meta{ color:var(--muted); font-size:.92rem; margin:-12px 0 26px; }
 .panel a.back-link{
@@ -200,7 +200,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 .panel a.contact:hover{ color:var(--muted); -webkit-text-stroke-color:var(--muted); }
 
 /* ---- field-notes index list ---- */
-.notes-index{ list-style:none; margin:10px 0 0; padding:0; max-width:46rem; }
+.notes-index{ list-style:none; margin:10px 0 0; padding:0; max-width:37rem; }
 .notes-index li{ position:relative; margin:0; padding:26px 0; }
 .notes-index li:first-child{ padding-top:0; }   /* first entry hugs the lede instead of stacking gaps */
 .notes-index li:not(:last-child)::after{   /* centered hairline between entries, ~60% width */
@@ -225,7 +225,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 .notes-index .more:hover{ color:var(--ink); }
 
 /* ---- field-notes feed (full-text for short notes, summary + link for long) ---- */
-.notes-feed{ max-width:46rem; margin:10px 0 0; }
+.notes-feed{ max-width:37rem; margin:10px 0 0; }
 .notes-feed .note{ position:relative; padding:34px 0; }
 .notes-feed .note:first-child{ padding-top:0; }   /* first entry hugs the lede */
 .notes-feed .note:not(:last-child)::after{         /* centered hairline between entries */
