@@ -2,6 +2,10 @@ baseURL = "https://thestudyof.ai/"
 locale = "en"
 title = "thestudyof.ai"
 enableRobotsTXT = true
+summaryLength = 120   # ~120-word auto-summary for long field notes in the feed
+
+[pagination]
+  pagerSize = 8       # field-notes feed paginates only once there are more than this
 
 [params]
   author = "S J Sederholm"

@@ -224,6 +224,37 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 }
 .notes-index .more:hover{ color:var(--ink); }
 
+/* ---- field-notes feed (full-text for short notes, summary + link for long) ---- */
+.notes-feed{ max-width:46rem; margin:10px 0 0; }
+.notes-feed .note{ position:relative; padding:34px 0; }
+.notes-feed .note:first-child{ padding-top:0; }   /* first entry hugs the lede */
+.notes-feed .note:not(:last-child)::after{         /* centered hairline between entries */
+  content:""; position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  width:60%; height:1px; background:rgba(67,61,55,.18);
+}
+.notes-feed .note-title{ margin:0; font-size:1.35rem; }
+.notes-feed .note-title a{ color:var(--ink); text-decoration:none; }
+.notes-feed .note-title a:hover{ color:var(--muted); }
+.notes-feed .note-date{ display:block; color:var(--muted); font-size:.88rem; margin:5px 0 14px; }
+.notes-feed .note-body > :first-child{ margin-top:0; }
+.notes-feed .note-body p{ margin:0 0 16px; }
+.notes-feed .note-body > :last-child{ margin-bottom:0; }
+.notes-feed .more-wrap{ margin-top:14px; }
+.notes-feed a.more{
+  font-family:var(--font-head); font-weight:600; font-size:.92rem;
+  color:var(--muted); text-decoration:none; transition:color .18s;
+}
+.notes-feed a.more:hover{ color:var(--ink); }
+
+/* ---- pager: only shown past pagerSize notes ---- */
+.pager{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:auto; padding-top:44px; font-size:.9rem;
+}
+.pager .pager-count{ color:var(--muted); font-size:.85rem; letter-spacing:.04em; }
+.panel .pager a{ color:var(--muted); text-decoration:none; transition:color .18s; }
+.panel .pager a:hover{ color:var(--ink); }
+
 /* ---- prev/next at the foot of an entry — settles to the bottom, styled like .back-link ---- */
 .entry-nav{
   display:flex; justify-content:space-between;

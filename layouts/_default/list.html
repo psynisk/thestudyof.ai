@@ -1,25 +1,28 @@
 {{ define "main" }}
   {{ with .Params.lede }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
   {{ .Content }}
-  <ul class="notes-index">
-    {{ range .Pages.ByDate.Reverse }}
-      <li>
-        {{ $url := .RelPermalink }}
-        <a href="{{ $url }}">{{ .Title }}</a>
+  {{ $paginator := .Paginate .Pages.ByDate.Reverse }}
+  <div class="notes-feed">
+    {{ range $paginator.Pages }}
+      <article class="note">
+        <h2 class="note-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         <span class="note-date">{{ .Date.Format "January 2, 2006" }}</span>
-        {{ with .Plain | htmlUnescape | plainify | strings.TrimSpace }}
-          {{ $short := truncate 175 "" . }}
-          {{ $cut := ne (printf "%v" $short) . }}
-          {{ $words := split $short " " }}
-          {{ if and $cut (gt (len $words) 5) }}
-            {{ $head := delimit (first (sub (len $words) 3) $words) " " }}
-            {{ $tail := delimit (after (sub (len $words) 3) $words) " " }}
-            <p>{{ $head }} <span class="fade-tail">{{ $tail }}</span> <a class="more" href="{{ $url }}">[…]</a></p>
+        <div class="note-body">
+          {{ if lt .WordCount 400 }}
+            {{ .Content }}
           {{ else }}
-            <p>{{ $short }}{{ if $cut }} <a class="more" href="{{ $url }}">[…]</a>{{ end }}</p>
+            {{ .Summary }}
+            <p class="more-wrap"><a class="more" href="{{ .RelPermalink }}">Read the rest →</a></p>
           {{ end }}
-        {{ end }}
-      </li>
+        </div>
+      </article>
     {{ end }}
-  </ul>
+  </div>
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pager">
+      <span>{{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}">‹ Newer</a>{{ end }}</span>
+      <span class="pager-count">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+      <span>{{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}">Older ›</a>{{ end }}</span>
+    </nav>
+  {{ end }}
 {{ end }}
