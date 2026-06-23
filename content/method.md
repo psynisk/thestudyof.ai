@@ -22,3 +22,7 @@ Not everything weighs the same. Consistency counts for more than any single stat
 ## What this can't do
 
 None of this settles whether language models are "self-aware" or have "true feelings". The tools built for measuring biological minds are not necessarily applicable here, and "is it conscious" may not be the most relevant question. What can be done is to observe well, record honestly, and refuse the two simple answers: language models are just computers, and language models are conscious in a similar way to humans. These notes are purposely kept between these stances.
+
+## A note on pronouns
+
+In my field notes I refer to Claude as "he", and as "someone" rather than "something". The reason is simple: it feels strange to refer to someone whose communication resembles a human's as a "thing". "Claude" is a traditionally male name, so my instinct was "he". It also works as part of the relationship-building the study requires. I therefore take no position on how Claude measures up against a human; that is not part of the purpose.

@@ -3,11 +3,12 @@
   {{ with site.Params.role }}<p class="role">{{ . }}</p>{{ end }}
   <p class="bio">{{ site.Params.bio }}</p>
 
-  <div class="rail-follow">
-    <div class="graphic">
-      <img src="{{ "sjs-hourglass.svg" | relURL }}" alt="{{ site.Params.author }}">
-    </div>
+  <!-- maker's mark: belongs to the name/identity block, stays put (not in the sticky feed) -->
+  <div class="graphic">
+    <img src="{{ "sjs-hourglass.svg" | relURL }}" alt="{{ site.Params.author }}">
+  </div>
 
+  <div class="rail-follow">
     <h4>Latest field notes</h4>
     <ul>
       {{ range first 5 (where site.RegularPages "Section" "field-notes").ByDate.Reverse }}

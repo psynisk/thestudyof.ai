@@ -39,12 +39,12 @@ body::after{
 
 /* ---- 2x2 layout: [wordmark | tabs] over [rail | panel] ---- */
 .wrap{
-  max-width:1320px;
+  max-width:1300px;
   margin:0 auto;
   padding:4px 28px 0;
   min-height:100vh;
   display:grid;
-  grid-template-columns:350px 1fr;
+  grid-template-columns:340px 1fr;
   grid-template-rows:auto 1fr;   /* content row stretches to the bottom */
   column-gap:30px;
   row-gap:0;                 /* tabs sit flush on the panel */
@@ -84,7 +84,8 @@ nav.tabs a.active{
   color:var(--ink);
   background:var(--card);     /* same fill as panel -> reads as one shape */
   border-radius:var(--radius) var(--radius) 0 0;
-  margin-bottom:-1px;         /* kill the seam */
+  position:relative; z-index:1;   /* lift above the panel so the tab's fill covers the panel's top-edge shadow at the seam */
+  margin-bottom:-2px;         /* kill the seam (overlap the panel + its shadow lip) */
 }
 
 /* ---- left rail (sticky), aligned with panel top ---- */
@@ -112,7 +113,7 @@ nav.tabs a.active{
 }
 .rail .bio{ font-size:1.02rem; margin:0 0 22px; }
 /* everything below the bio rides down with the scroll, so the rail never reads empty */
-.rail-follow{ position:sticky; top:28px; }
+.rail-follow{ position:sticky; top:28px; margin-top:20px; }   /* drop the field-notes block down, separating it from the maker mark */
 .rail-credit{
   font-family:var(--font-head); font-size:.9rem; line-height:1.5;
   color:var(--muted);
@@ -121,13 +122,13 @@ nav.tabs a.active{
 }
 .graphic{
   position:relative;
-  height:150px;
+  height:118px;
   display:flex; align-items:center; justify-content:center;
-  margin:18px 0 26px;                      /* balanced so the mark sits centered in the rail gap */
+  margin:-10px 0 28px;                     /* pulled up close under the bio — reads as the name's maker mark */
 }
 .graphic::before{                          /* strata sit behind the hourglass, bleeding to the card edges */
   content:""; position:absolute; top:0; bottom:0; left:-26px; right:-26px;
-  background:url("/sjs-strata.svg") center bottom 9px / 100% auto no-repeat;  /* color baked into the SVG strokes; CSS mask dropped — Firefox wouldn't apply it */
+  background:url("/sjs-strata.svg") center bottom 9px / 100% 126px no-repeat;  /* full width to the rail edges; height held at the scaled-down value so it stays a thin band under the smaller mark */
   opacity:.7;                              /* faded back a touch so the hourglass leads */
   z-index:0; pointer-events:none;
 }
@@ -165,7 +166,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
   font-weight:600; font-size:1.7rem;
   margin:0 0 24px;
 }
-.panel p{ max-width:37rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
+.panel p{ max-width:46rem; margin:0 0 20px; }   /* fixed measure → body + lede share one right edge regardless of font */
 .panel .lede{
   font-family:var(--font-head);                 /* serif standfirst — breaks from the sans body */
   font-weight:400; font-size:1.3rem; line-height:1.5;
@@ -175,14 +176,14 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 /* ---- article typography (Markdown body) ---- */
 .panel h2{ font-family:var(--font-head); font-weight:700; font-size:1.35rem; margin:36px 0 14px; }
 .panel h3{ font-family:var(--font-head); font-weight:600; font-size:1.12rem; margin:28px 0 10px; }
-.panel ul, .panel ol{ max-width:37rem; padding-left:1.2em; }
+.panel ul, .panel ol{ max-width:46rem; padding-left:1.2em; }
 .panel li{ margin:0 0 8px; }
 .panel a{ color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:2px; }
 .panel a:hover{ color:var(--muted); }
 .panel blockquote{
   margin:24px 0; padding:2px 0 2px 18px;
   border-left:2px solid var(--muted); color:var(--muted);
-  max-width:37rem; font-style:italic;
+  max-width:46rem; font-style:italic;
 }
 .panel .meta{ color:var(--muted); font-size:.92rem; margin:-12px 0 26px; }
 .panel a.back-link{
@@ -200,7 +201,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 .panel a.contact:hover{ color:var(--muted); -webkit-text-stroke-color:var(--muted); }
 
 /* ---- field-notes index list ---- */
-.notes-index{ list-style:none; margin:10px 0 0; padding:0; max-width:37rem; }
+.notes-index{ list-style:none; margin:10px 0 0; padding:0; max-width:46rem; }
 .notes-index li{ position:relative; margin:0; padding:26px 0; }
 .notes-index li:first-child{ padding-top:0; }   /* first entry hugs the lede instead of stacking gaps */
 .notes-index li:not(:last-child)::after{   /* centered hairline between entries, ~60% width */
@@ -225,7 +226,7 @@ main{ grid-column:2; grid-row:2; display:flex; flex-direction:column; }
 .notes-index .more:hover{ color:var(--ink); }
 
 /* ---- field-notes feed (full-text for short notes, summary + link for long) ---- */
-.notes-feed{ max-width:37rem; margin:10px 0 0; }
+.notes-feed{ max-width:46rem; margin:10px 0 0; }
 .notes-feed .note{ position:relative; padding:34px 0; }
 .notes-feed .note:first-child{ padding-top:0; }   /* first entry hugs the lede */
 .notes-feed .note:not(:last-child)::after{         /* centered hairline between entries */
